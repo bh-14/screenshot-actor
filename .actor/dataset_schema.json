@@ -1,0 +1,41 @@
+{
+    "$schema": "https://apify.com/schemas/v1/dataset.ide.json",
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "url": { "type": "string", "description": "The URL from the input." },
+            "finalUrl": { "type": ["string", "null"], "description": "The URL after redirects." },
+            "statusCode": { "type": ["integer", "null"], "description": "HTTP status of the page." },
+            "pageTitle": { "type": ["string", "null"], "description": "Title of the page." },
+            "screenshotUrl": { "type": ["string", "null"], "description": "Public link to the image. Null when the screenshot failed." },
+            "screenshotKey": { "type": ["string", "null"], "description": "Key of the image in the run's key-value store." },
+            "format": { "type": ["string", "null"], "description": "png or jpeg." },
+            "fullPage": { "type": ["boolean", "null"], "description": "Whether the whole page was captured." },
+            "device": { "type": ["string", "null"], "description": "desktop, mobile or tablet." },
+            "sizeBytes": { "type": ["integer", "null"], "description": "Size of the image file." },
+            "takenAt": { "type": ["string", "null"], "description": "When the screenshot was taken (ISO 8601, UTC)." },
+            "error": { "type": ["string", "null"], "description": "Why the screenshot failed. Null on success." }
+        },
+        "required": ["url", "screenshotUrl", "error"]
+    },
+    "views": {
+        "overview": {
+            "title": "Screenshots",
+            "transformation": {
+                "fields": ["screenshotUrl", "url", "pageTitle", "statusCode", "device", "error"]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "screenshotUrl": { "label": "Screenshot", "format": "image" },
+                    "url": { "label": "URL", "format": "link" },
+                    "pageTitle": { "label": "Title", "format": "text" },
+                    "statusCode": { "label": "Status", "format": "number" },
+                    "device": { "label": "Device", "format": "text" },
+                    "error": { "label": "Error", "format": "text" }
+                }
+            }
+        }
+    }
+}

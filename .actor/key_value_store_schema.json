@@ -1,0 +1,13 @@
+{
+    "$schema": "https://apify.com/schemas/v1/key-value-store.ide.json",
+    "actorKeyValueStoreSchemaVersion": 1,
+    "title": "Screenshots",
+    "description": "Screenshot images, one record per URL.",
+    "collections": {
+        "screenshots": {
+            "title": "Screenshots",
+            "description": "PNG or JPEG images named screenshot-<index>-<hash>.",
+            "keyPrefix": "screenshot-"
+        }
+    }
+}

@@ -1,0 +1,155 @@
+{
+    "$schema": "https://apify.com/schemas/v1/input.ide.json",
+    "title": "Website Screenshot input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "urls": {
+            "title": "URLs",
+            "type": "array",
+            "description": "Pages to screenshot. One screenshot per URL. Only http:// and https:// URLs are accepted.",
+            "editor": "requestListSources",
+            "prefill": [
+                {
+                    "url": "https://apify.com"
+                },
+                {
+                    "url": "https://www.wikipedia.org"
+                }
+            ]
+        },
+        "fullPage": {
+            "title": "Full page",
+            "type": "boolean",
+            "description": "Capture the whole scrollable page instead of only the visible viewport.",
+            "default": true
+        },
+        "device": {
+            "title": "Device",
+            "type": "string",
+            "description": "Desktop uses the viewport size below. Mobile emulates an iPhone 13 and tablet an iPad (7th gen), including user agent and pixel ratio.",
+            "editor": "select",
+            "enum": [
+                "desktop",
+                "mobile",
+                "tablet"
+            ],
+            "enumTitles": [
+                "Desktop",
+                "Mobile (iPhone 13)",
+                "Tablet (iPad)"
+            ],
+            "default": "desktop"
+        },
+        "viewportWidth": {
+            "title": "Viewport width (px)",
+            "type": "integer",
+            "description": "Browser window width for the desktop device.",
+            "minimum": 320,
+            "maximum": 3840,
+            "default": 1280
+        },
+        "viewportHeight": {
+            "title": "Viewport height (px)",
+            "type": "integer",
+            "description": "Browser window height for the desktop device. With Full page on, it only affects how the page lays out.",
+            "minimum": 240,
+            "maximum": 2160,
+            "default": 800
+        },
+        "format": {
+            "title": "Image format",
+            "type": "string",
+            "description": "PNG is lossless; JPEG files are much smaller.",
+            "editor": "select",
+            "enum": [
+                "png",
+                "jpeg"
+            ],
+            "enumTitles": [
+                "PNG",
+                "JPEG"
+            ],
+            "default": "png"
+        },
+        "jpegQuality": {
+            "title": "JPEG quality",
+            "type": "integer",
+            "description": "From 1 to 100. Used only when the format is JPEG.",
+            "minimum": 1,
+            "maximum": 100,
+            "default": 80
+        },
+        "hideCookieBanners": {
+            "title": "Hide cookie banners",
+            "type": "boolean",
+            "description": "Hide the consent banners of common cookie frameworks (OneTrust, Cookiebot, Didomi, Usercentrics and others) with CSS. Nothing is clicked or accepted.",
+            "default": true
+        },
+        "hideSelectors": {
+            "title": "Extra CSS selectors to hide",
+            "type": "array",
+            "description": "Any other elements to hide before the screenshot, such as chat widgets or popups.",
+            "editor": "stringList",
+            "prefill": [],
+            "default": []
+        },
+        "scrollToBottom": {
+            "title": "Scroll to load lazy images",
+            "type": "boolean",
+            "description": "Before a full-page screenshot, scroll through the page so lazy-loaded images appear.",
+            "default": true
+        },
+        "waitUntil": {
+            "title": "Wait until",
+            "type": "string",
+            "description": "How long to wait for the page before the capture. The DOM is always awaited; 'Page load' and 'Network idle' get up to 30 extra seconds, and pages that never finish loading (common on ad-heavy sites) are captured as they are instead of failing.",
+            "editor": "select",
+            "enum": [
+                "load",
+                "domcontentloaded",
+                "networkidle"
+            ],
+            "enumTitles": [
+                "Page load",
+                "DOM content loaded",
+                "Network idle"
+            ],
+            "default": "load"
+        },
+        "waitForSelector": {
+            "title": "Wait for selector",
+            "type": "string",
+            "description": "Optional CSS selector that must appear before the screenshot is taken.",
+            "editor": "textfield",
+            "prefill": ""
+        },
+        "delayMs": {
+            "title": "Extra delay (ms)",
+            "type": "integer",
+            "description": "Extra time to wait right before the screenshot, for animations.",
+            "minimum": 0,
+            "maximum": 30000,
+            "default": 0
+        },
+        "timeoutSecs": {
+            "title": "Page timeout (seconds)",
+            "type": "integer",
+            "description": "Maximum time to load each page. Pages that take longer are reported as failed and are not charged.",
+            "minimum": 5,
+            "maximum": 180,
+            "default": 60
+        },
+        "maxConcurrency": {
+            "title": "Max concurrency",
+            "type": "integer",
+            "description": "How many pages to screenshot in parallel.",
+            "minimum": 1,
+            "maximum": 10,
+            "default": 2
+        }
+    },
+    "required": [
+        "urls"
+    ]
+}

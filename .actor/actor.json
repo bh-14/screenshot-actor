@@ -1,0 +1,23 @@
+{
+    "$schema": "https://apify.com/schemas/v1/actor.ide.json",
+    "actorSpecification": 1,
+    "name": "website-screenshot",
+    "title": "Website Screenshot",
+    "description": "Full-page or viewport screenshots of any list of URLs, as PNG or JPEG, on desktop, mobile or tablet. Hides cookie banners and loads lazy images. Pay only for successful screenshots.",
+    "version": "0.0",
+    "buildTag": "latest",
+    "meta": {
+        "templateId": "python-playwright",
+        "generatedBy": "Claude Code with Claude Opus 5.5"
+    },
+    "inputSchema": "./input_schema.json",
+    "outputSchema": "./output_schema.json",
+    "storages": {
+        "dataset": "./dataset_schema.json",
+        "keyValueStore": "./key_value_store_schema.json"
+    },
+    "dockerfile": "../Dockerfile",
+    "defaultMemoryMbytes": 2048,
+    "minMemoryMbytes": 1024,
+    "maxMemoryMbytes": 4096
+}
